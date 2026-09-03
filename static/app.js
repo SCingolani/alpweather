@@ -3,7 +3,38 @@ const map = L.map('map').setView([46.5, 11.8], 7);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution:'&copy; OpenStreetMap contributors', maxZoom:18 }).addTo(map);
 let routeLayer, markerLayer=L.layerGroup().addTo(map), trip, forecastTimes=[];
 const HOURLY='temperature_2m,apparent_temperature,dew_point_2m,precipitation,precipitation_probability,rain,showers,snowfall,snow_depth,weather_code,cloud_cover,visibility,wind_speed_10m,wind_gusts_10m,wind_direction_10m,freezing_level_height,cape,uv_index,relative_humidity_2m,surface_pressure,pressure_msl,is_day,sunshine_duration,direct_radiation';
-const places=[['Chamonix',45.9237,6.8694,1035],['Col du Galibier',45.0641,6.4078,2642],['Zermatt',46.0207,7.7491,1608],['Furka Pass',46.5729,8.4152,2429],['Stelvio Pass',46.5286,10.4532,2757],['St. Moritz',46.4908,9.8355,1822],['Innsbruck',47.2692,11.4041,574],['Grossglockner Pass',47.0745,12.8425,2504],['Bolzano',46.4983,11.3548,262],['Merano',46.6713,11.1594,325],['Reschen Pass',46.834,10.5061,1504],['Brenner Pass',47.0036,11.5064,1370],['Val Gardena',46.5572,11.718,1563],['Canazei',46.4769,11.7712,1465],['Arabba',46.4972,11.8758,1602],['Sella Pass',46.5088,11.7578,2240],['Passo Giau',46.4831,12.052,2236],['Alleghe',46.4075,12.0231,979],["Cortina d'Ampezzo",46.5405,12.1357,1224],['Tre Cime',46.6187,12.3028,2320],['Belluno',46.14,12.2175,390],['Vittorio Veneto',45.9803,12.2996,138],['Treviso',45.6669,12.243,15],['Venice',45.4408,12.3155,2],['Bassano del Grappa',45.7666,11.734,129],['Lake Garda — Riva',45.8858,10.8412,70],['Monte Zoncolan',46.5,12.92,1730],['Bled',46.3692,14.1136,501],['Vršič Pass',46.4352,13.7441,1611],['Landeck',47.1399,10.5659,817],['Arlberg Pass',47.1292,10.211,1793],['Bregenz',47.5031,9.7471,400],['Lindau',47.546,9.6844,401],['Konstanz',47.6779,9.1732,405]];
+const places = [
+  ['Chamonix',45.9237,6.8694,1035], ['Col du Galibier',45.0641,6.4078,2642],
+  ['Zermatt',46.0207,7.7491,1608], ['Furka Pass',46.5729,8.4152,2429],
+  ['Stelvio Pass',46.5286,10.4532,2757], ['Bormio',46.4683,10.3725,1225],
+  ['St. Moritz',46.4908,9.8355,1822], ['Lake Como — Bellagio',45.9871,9.2619,229],
+  ['Lake Maggiore — Stresa',45.8846,8.5298,200], ['Lake Garda — Riva',45.8858,10.8412,70],
+  ['Trento',46.0748,11.1217,194], ['Bolzano',46.4983,11.3548,262],
+  ['Merano',46.6713,11.1594,325], ['Reschen Pass',46.834,10.5061,1504],
+  ['Brenner Pass',47.0036,11.5064,1370], ['Innsbruck',47.2692,11.4041,574],
+  ['Grossglockner Pass',47.0745,12.8425,2504], ['Val Gardena',46.5572,11.718,1563],
+  ['Canazei',46.4769,11.7712,1465], ['Arabba',46.4972,11.8758,1602],
+  ['Sella Pass',46.5088,11.7578,2240], ['Passo Giau',46.4831,12.052,2236],
+  ['Alleghe',46.4075,12.0231,979], ["Cortina d'Ampezzo",46.5405,12.1357,1224],
+  ['Tre Cime',46.6187,12.3028,2320], ['Belluno',46.14,12.2175,390],
+  ['Vittorio Veneto',45.9803,12.2996,138], ['Treviso',45.6669,12.243,15],
+  ['Venice',45.4408,12.3155,2], ['Bassano del Grappa',45.7666,11.734,129],
+  ['Monte Zoncolan',46.5,12.92,1730], ['Sella Nevea',46.3906,13.4746,1190],
+  ['Tarvisio',46.5057,13.5786,754], ['Udine',46.0711,13.2346,113],
+  ['Trieste',45.6495,13.7768,2], ['Bled',46.3692,14.1136,501],
+  ['Lake Bohinj',46.2783,13.8867,526], ['Kranjska Gora',46.4845,13.7857,806],
+  ['Vršič Pass',46.4352,13.7441,1611], ['Mangart Saddle',46.4395,13.6412,2055],
+  ['Bovec',46.3376,13.5527,434], ['Soča Valley — Kobarid',46.2471,13.5791,234],
+  ['Ljubljana',46.0569,14.5058,295], ['Logar Valley',46.3937,14.6315,730],
+  ['Maribor',46.5547,15.6459,275], ['Postojna',45.7749,14.2133,556],
+  ['Piran',45.5283,13.5683,16], ['Rijeka',45.3271,14.4422,10],
+  ['Učka Pass',45.2857,14.2014,922], ['Rovinj',45.0812,13.6387,10],
+  ['Pula',44.8666,13.8496,30], ['Zagreb',45.815,15.9819,122],
+  ['Plitvice Lakes',44.8805,15.616,640], ['Northern Velebit — Zavižan',44.814,14.975,1594],
+  ['Landeck',47.1399,10.5659,817], ['Arlberg Pass',47.1292,10.211,1793],
+  ['Bregenz',47.5031,9.7471,400], ['Lindau',47.546,9.6844,401],
+  ['Konstanz',47.6779,9.1732,405]
+];
 const weatherNames={0:'Clear',1:'Mostly clear',2:'Partly cloudy',3:'Overcast',45:'Fog',48:'Rime fog',51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',56:'Freezing drizzle',57:'Heavy freezing drizzle',61:'Light rain',63:'Rain',65:'Heavy rain',66:'Freezing rain',67:'Heavy freezing rain',71:'Light snow',73:'Snow',75:'Heavy snow',77:'Snow grains',80:'Rain showers',81:'Rain showers',82:'Heavy showers',85:'Snow showers',86:'Heavy snow showers',95:'Thunderstorm',96:'Thunderstorm with hail',99:'Severe hailstorm'};
 const esc=value=>{const el=document.createElement('div');el.textContent=value??'';return el.innerHTML};
 const date=value=>{const d=new Date(value);return Number.isNaN(d.getTime())?null:d};
