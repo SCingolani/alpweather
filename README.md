@@ -1,32 +1,28 @@
 # Alpine Weather Route
 
-Upload a GPX cycling route and inspect hourly weather forecasts along it on an interactive map. The application samples the route roughly every 10 km, estimates arrival times from departure and riding speed, and retrieves 16-day hourly forecasts from Open-Meteo.
+A static, browser-only weather planner for cycling in the Alps and Dolomites. Upload a GPX route to see 16-day hourly forecasts along it, or explore curated locations from Chamonix to Venice, Slovenia, and Bodensee.
 
-## Run locally
+There is no application server: GPX parsing, route sampling, arrival-time estimation, and weather requests all run in the browser. Forecast data comes directly from [Open-Meteo](https://open-meteo.com/) and maps from [OpenStreetMap](https://www.openstreetmap.org/).
+
+## Local development
+
+Because browsers restrict some features when opening files directly, serve the directory with any static server:
 
 ```console
-cargo run
+python3 -m http.server 8000 --directory static
 ```
 
-Then open <http://127.0.0.1:3000>. With Nix, use `nix develop` for a development shell or `nix run` once the lock file has been generated.
+Then open <http://localhost:8000>.
 
-Configuration is through `WEATHER_LISTEN_ADDRESS` (default `127.0.0.1`), `WEATHER_PORT` (default `3000`), `WEATHER_STATIC_DIR` (default `static`), `WEATHER_SAMPLE_KM` (default `10`) and `RUST_LOG`.
+## GitHub Pages
 
-## API
+The workflow in `.github/workflows/pages.yml` publishes `static/` whenever `main` is pushed. In the repository settings, select **GitHub Actions** as the Pages source. No API keys or repository secrets are required.
 
-`POST /api/trips` accepts multipart fields `gpx`, `departure` (RFC 3339) and `speed_kmh`. It returns the route plus all forecast samples. `GET /api/trips/{id}` returns a previously uploaded trip; trips currently live in process memory. `GET /api/alps` returns forecasts for a curated set of Alpine passes, peaks, valleys, and cycling bases for the no-GPX overview mode.
+The site uses relative asset paths, so it works both at a user/organization Pages root and under a project path such as `https://owner.github.io/repository/`.
 
-Forecasts inevitably simplify conditions in complex terrain. Check official warnings and local mountain forecasts before riding. Weather data is attributed to Open-Meteo and its upstream national/model providers; map data is from OpenStreetMap contributors.
+## Limitations
 
-## NixOS deployment
-
-Add this flake as an input, import `inputs.alpine-weather-route.nixosModules.default`, then enable the service:
-
-```nix
-services.alpine-weather-route = {
-  enable = true;
-  listenAddress = "0.0.0.0";
-  port = 3000;
-  openFirewall = true;
-};
-```
+- Uploaded GPX files stay in the browser and are not persisted or sent to this repository.
+- Weather requests are sent from the visitor's browser to Open-Meteo.
+- Model forecasts simplify complex mountain terrain. Check official warnings and local mountain forecasts before riding.
+- Forecast availability is limited to Open-Meteo's current forecast horizon.

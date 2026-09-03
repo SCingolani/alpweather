@@ -7,8 +7,8 @@
   <title>Alpine Route Weather</title>
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="/static/styles.css">
-  <link rel="stylesheet" href="/static/weather-markers.css">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./weather-markers.css">
 </head>
 <body>
   <header class="topbar"><div class="brand"><span class="brand-mark" aria-hidden="true">▲</span><div><strong>Alpine Route Weather</strong><small>Forecasts for every climb and pass</small></div></div></header>
@@ -30,6 +30,6 @@
     <section class="map-panel"><div id="map" aria-label="Interactive weather route map"></div><div class="map-overlay"><label for="time-slider">Forecast time</label><output id="time-label" for="time-slider">Select a route first</output><input id="time-slider" type="range" min="0" max="0" value="0" step="1" disabled aria-label="Forecast time along route"><div class="slider-ticks"><span>Departure</span><span id="end-label">—</span></div></div><div id="empty-state" class="empty-state"><div class="mountain" aria-hidden="true">⌁</div><h2>Your route, in weather</h2><p>Upload a GPX file to begin. Forecast points will appear along the route.</p></div></section>
   </main>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="/static/app.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
