@@ -1,0 +1,52 @@
+.weather-marker-shell {
+  background: none !important;
+  border: 0 !important;
+}
+
+.weather-marker {
+  align-items: center;
+  border: 2px solid #fff;
+  border-radius: 15px;
+  box-shadow: 0 2px 7px #17252155;
+  color: #fff;
+  display: flex;
+  font-size: 11px;
+  font-weight: 800;
+  gap: 2px;
+  height: 30px;
+  justify-content: center;
+  line-height: 1;
+  min-width: 47px;
+  padding: 3px 6px 3px 4px;
+  white-space: nowrap;
+}
+
+.weather-marker svg {
+  fill: none;
+  height: 19px;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+  width: 19px;
+}
+
+.weather-marker .weather-accent { stroke: #fff; }
+.weather-marker span { min-width: 19px; text-align: center; }
+
+.secondary {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--green);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 9px;
+  padding: 10px 14px;
+  width: 100%;
+}
+
+.secondary:hover { background: var(--mint); border-color: var(--green); }
+.secondary:disabled { cursor: wait; opacity: .6; }

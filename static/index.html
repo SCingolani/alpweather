@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Weather along your cycling route through the Alps and Dolomites.">
+  <title>Alpine Route Weather</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/weather-markers.css">
+</head>
+<body>
+  <header class="topbar"><div class="brand"><span class="brand-mark" aria-hidden="true">▲</span><div><strong>Alpine Route Weather</strong><small>Forecasts for every climb and pass</small></div></div></header>
+  <main class="layout">
+    <aside class="sidebar" aria-label="Route controls">
+      <section class="intro"><p class="eyebrow">Plan your ride</p><h1>Weather along the way</h1><p>Upload a GPX to see conditions at every point on your Alpine or Dolomite route.</p></section>
+      <form id="trip-form">
+        <label for="gpx">GPX route <span class="required">*</span></label>
+        <div class="dropzone" id="dropzone"><input id="gpx" name="gpx" type="file" accept=".gpx,application/gpx+xml,application/xml,text/xml" required><span class="upload-icon" aria-hidden="true">⇧</span><strong id="file-name">Drop GPX here or <u>browse</u></strong><small>GPX files up to 10 MB</small></div>
+        <div class="two-col"><div><label for="departure">Departure</label><input id="departure" name="departure_datetime" type="datetime-local" required></div><div><label for="speed">Speed <span class="unit">km/h</span></label><input id="speed" name="speed_kmh" type="number" min="1" max="80" step="0.5" value="18" required></div></div>
+        <button class="primary" id="submit" type="submit"><span>Fetch route forecast</span><span class="button-arrow" aria-hidden="true">→</span></button>
+        <button class="secondary" id="explore" type="button">Explore the Alps without a GPX</button>
+      </form>
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+      <section id="summary" class="summary hidden" aria-label="Route summary"><div class="summary-head"><h2>Route overview</h2><button id="clear" class="text-button" type="button">Clear</button></div><div class="stat-grid"><div><span>Distance</span><b id="distance">—</b></div><div><span>Ride time</span><b id="duration">—</b></div><div><span>Elevation</span><b id="elevation">—</b></div></div><div id="alerts" class="alerts"></div></section>
+      <section class="legend"><h2>Conditions</h2><div><i class="dot dry"></i> Dry / mild</div><div><i class="dot rain"></i> Rain</div><div><i class="dot snow"></i> Snow / freezing</div><div><i class="dot storm"></i> Thunderstorm</div></section>
+      <p class="source-note">Forecasts are model guidance. Mountain weather can change quickly; check local warnings before setting out.</p>
+    </aside>
+    <section class="map-panel"><div id="map" aria-label="Interactive weather route map"></div><div class="map-overlay"><label for="time-slider">Forecast time</label><output id="time-label" for="time-slider">Select a route first</output><input id="time-slider" type="range" min="0" max="0" value="0" step="1" disabled aria-label="Forecast time along route"><div class="slider-ticks"><span>Departure</span><span id="end-label">—</span></div></div><div id="empty-state" class="empty-state"><div class="mountain" aria-hidden="true">⌁</div><h2>Your route, in weather</h2><p>Upload a GPX file to begin. Forecast points will appear along the route.</p></div></section>
+  </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>
