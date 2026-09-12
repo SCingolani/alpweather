@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Weather along your cycling route through the Alps and Dolomites.">
+  <meta name="description" content="Weather along your GPX route or a general overview of conditions.">
   <title>Alpine Route Weather</title>
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -11,13 +11,22 @@
   <link rel="stylesheet" href="./weather-markers.css">
 </head>
 <body>
-  <header class="topbar"><div class="brand"><span class="brand-mark" aria-hidden="true">▲</span><div><strong>Alpine Route Weather</strong><small>Forecasts for every climb and pass</small></div></div></header>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">▲</span><div><strong>Alpine Route Weather</strong><small>Forecasts for every climb and pass</small></div></div>
+    <details class="weather-source">
+      <summary>Weather: <span>Open-Meteo</span></summary>
+      <div class="weather-source-description">
+        <p>Hourly model forecasts, up to 16 days ahead. Open-Meteo’s default “Best Match” automatically selects suitable regional and global weather models from national weather services and combines their output into a continuous forecast. The models used can vary by location and forecast horizon.</p>
+        <a href="https://open-meteo.com/en/docs" target="_blank" rel="noopener noreferrer">About the forecast data ↗</a>
+      </div>
+    </details>
+  </header>
   <main class="layout">
     <aside class="sidebar" aria-label="Route controls">
-      <section class="intro"><p class="eyebrow">Plan your ride</p><h1>Weather along the way</h1><p>Upload a GPX to see conditions at every point on your Alpine or Dolomite route.</p></section>
+      <section class="intro"><p class="eyebrow">Plan your ride</p><h1>Weather along the way</h1><p>Upload a GPX to see weather along your route, or explore a general weather overview.</p></section>
       <form id="trip-form">
         <label for="gpx">GPX route <span class="required">*</span></label>
-        <div class="dropzone" id="dropzone"><input id="gpx" name="gpx" type="file" accept=".gpx,application/gpx+xml,application/xml,text/xml" required><span class="upload-icon" aria-hidden="true">⇧</span><strong id="file-name">Drop GPX here or <u>browse</u></strong><small>GPX files up to 10 MB</small></div>
+        <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-controls="gpx" aria-label="Choose a GPX file"><input id="gpx" name="gpx" type="file" accept=".gpx,application/gpx+xml,application/xml,text/xml" required><span class="upload-icon" aria-hidden="true">⇧</span><strong id="file-name">Drop GPX here or <u>browse</u></strong><small>GPX files up to 10 MB</small></div>
         <div class="two-col"><div><label for="departure">Departure</label><input id="departure" name="departure_datetime" type="datetime-local" required></div><div><label for="speed">Speed <span class="unit">km/h</span></label><input id="speed" name="speed_kmh" type="number" min="1" max="80" step="0.5" value="18" required></div></div>
         <button class="primary" id="submit" type="submit"><span>Fetch route forecast</span><span class="button-arrow" aria-hidden="true">→</span></button>
         <button class="secondary" id="explore" type="button">Explore the Alps &amp; southern Bavaria without a GPX</button>
@@ -31,5 +40,18 @@
   </main>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="./app.js"></script>
+  <script>
+    const dropzone = document.getElementById('dropzone');
+    const gpxInput = document.getElementById('gpx');
+    dropzone.addEventListener('click', event => {
+      if (event.target !== gpxInput) gpxInput.click();
+    });
+    dropzone.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        gpxInput.click();
+      }
+    });
+  </script>
 </body>
 </html>

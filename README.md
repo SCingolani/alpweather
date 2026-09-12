@@ -1,6 +1,6 @@
 # Alpine Weather Route
 
-A static, browser-only weather planner for cycling in the Alps and Dolomites. Upload a GPX route to see 16-day hourly forecasts along it, or explore curated locations from Chamonix to Venice, Slovenia, Bodensee, and southern Bavaria, including the Allgäu, Bavarian Alps, lake district, and Munich.
+A static, browser-only weather planner for cycling routes. Upload a GPX route to see 16-day hourly forecasts along it, or explore a general overview of curated locations across the Alps, Slovenia, Bodensee, and southern Bavaria.
 
 There is no application server: GPX parsing, route sampling, arrival-time estimation, and weather requests all run in the browser. Forecast data comes directly from [Open-Meteo](https://open-meteo.com/) and maps from [OpenStreetMap](https://www.openstreetmap.org/).
 
