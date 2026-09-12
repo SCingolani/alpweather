@@ -33,7 +33,15 @@ const places = [
   ['Plitvice Lakes',44.8805,15.616,640], ['Northern Velebit — Zavižan',44.814,14.975,1594],
   ['Landeck',47.1399,10.5659,817], ['Arlberg Pass',47.1292,10.211,1793],
   ['Bregenz',47.5031,9.7471,400], ['Lindau',47.546,9.6844,401],
-  ['Konstanz',47.6779,9.1732,405]
+  ['Konstanz',47.6779,9.1732,405],
+  ['Oberstdorf',47.4072,10.2797,813], ['Sonthofen',47.514,10.281,741],
+  ['Kempten',47.7267,10.3139,674], ['Füssen',47.5696,10.7004,808],
+  ['Garmisch-Partenkirchen',47.4917,11.0955,708], ['Mittenwald',47.4422,11.2619,923],
+  ['Murnau am Staffelsee',47.6808,11.2014,688], ['Starnberg',47.998,11.3407,588],
+  ['Bad Tölz',47.7611,11.5589,658], ['Tegernsee',47.7083,11.7565,747],
+  ['Schliersee',47.7333,11.8667,784], ['Rosenheim',47.8561,12.1289,447],
+  ['Prien am Chiemsee',47.856,12.346,533], ['Reit im Winkl',47.6772,12.4708,695],
+  ['Berchtesgaden',47.6302,13.0012,572], ['Munich',48.1372,11.5756,519]
 ];
 const weatherNames={0:'Clear',1:'Mostly clear',2:'Partly cloudy',3:'Overcast',45:'Fog',48:'Rime fog',51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',56:'Freezing drizzle',57:'Heavy freezing drizzle',61:'Light rain',63:'Rain',65:'Heavy rain',66:'Freezing rain',67:'Heavy freezing rain',71:'Light snow',73:'Snow',75:'Heavy snow',77:'Snow grains',80:'Rain showers',81:'Rain showers',82:'Heavy showers',85:'Snow showers',86:'Heavy snow showers',95:'Thunderstorm',96:'Thunderstorm with hail',99:'Severe hailstorm'};
 const esc=value=>{const el=document.createElement('div');el.textContent=value??'';return el.innerHTML};
