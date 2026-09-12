@@ -40,6 +40,8 @@
 }
 
 .weather-marker .weather-accent { stroke: #fff; }
+.weather-marker .weather-sun { fill: #ffd54a; stroke: #ffd54a; }
+.weather-marker .weather-sun-rays { stroke: #ffd54a; }
 .weather-marker span { min-width: 19px; text-align: center; }
 .weather-marker small {
   border-top: 1px solid #ffffff66;
